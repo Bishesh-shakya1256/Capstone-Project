@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- Logo mark -->
+    <div class="auth-logo">
+      <img src="images/logo-icon.png" alt="" />
+    </div>
+
+    <!-- Heading -->
+    <div class="auth-heading">
+      <h1>Welcome Back to GreenScape</h1>
+      <p>Sign in to continue your plant journey</p>
+    </div>
+
+    <!-- Card -->
+    <div class="card auth-card signin-form">
+      <form class="form" id="signin-form">
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <div class="input-wrap">
+            <img src="images/email.png" alt="" class="input-icon" />
+            <input id="email" type="email" class="form-input" placeholder="you@example.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrap">
+            <img src="images/password.png" alt="" class="input-icon" />
+            <input id="password" type="password" class="form-input" placeholder="Enter your password" autocomplete="current-password" style="padding-right:40px" />
+            <button type="button" class="input-icon-r toggle-pw" id="toggle-pw" aria-label="Toggle password">👁</button>
+          </div>
+        </div>
+
+        <!-- Remember / Forgot -->
+        <div class="form-footer">
+          <label class="checkbox-label">
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <!-- <a href="password.html" class="form-link">Forgot password?</a> -->
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-green btn-sm btn-full">Sign In</button>
+
+      </form>
+
+      <p class="divider-text">
+        Don't have an account? <a href="sign-up.html">Sign up for free</a>
+      </p>
+    </div>
+
+    <a href="index.html" class="nav-link">← Back to Home</a>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/signin.js"></script>
+  <script src="js/user.js"></script>
+</body>
+</html>

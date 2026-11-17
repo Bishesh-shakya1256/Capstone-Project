@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <script>
+    if (!sessionStorage.getItem('gsUser')) location.replace('signin.html');
+  </script>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="Logo" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+    <div class="nav-links">
+      <a href="recommendations.html" class="nav-link">Recommendations</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="feedback.html" class="nav-link">Feedback</a>
+      <a href="profile.html" class="avatar ring gs-initial"></a>
+    </div>
+  </nav>
+
+  <div class="profile-page">
+    <div class="container">
+      <div class="profile-layout">
+
+        <!-- Left column -->
+        <div>
+          <!-- Profile card -->
+          <div class="card profile-card">
+            <div class="profile-avatar" id="gs-profile-avatar"></div>
+            <div class="profile-name" id="gs-profile-name"></div>
+            <div class="profile-email" id="gs-profile-email"></div>
+            <div class="profile-btns">
+              <a href="query.html" class="btn btn-green btn-sm btn-full">New Search</a>
+              <button class="btn btn-dark btn-sm btn-full" onclick="toggleEdit()">Edit Profile</button>
+              <button id="logout-btn" class="btn btn-dark btn-sm btn-full text-red">Sign Out</button>
+            </div>
+          </div>
+
+          <!-- Preferences -->
+          <div class="card pref-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+              <h3 style="margin:0">My Preferences</h3>
+              <a href="query.html" class="btn btn-dark btn-sm" style="font-size:12px;padding:4px 12px">Edit</a>
+            </div>
+            <div class="pref-list">
+              <div class="pref-item"><span class="pref-key">Light Level</span><span class="pref-val" id="pref-light">—</span></div>
+              <div class="pref-item"><span class="pref-key">Care Level</span><span class="pref-val" id="pref-care">—</span></div>
+              <div class="pref-item"><span class="pref-key">Plant Size</span><span class="pref-val" id="pref-size">—</span></div>
+              <div class="pref-item"><span class="pref-key">Pets</span><span class="pref-val" id="pref-pets">—</span></div>
+              <div class="pref-item"><span class="pref-key">Experience</span><span class="pref-val" id="pref-exp">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div>
+
+          <!-- Edit form (hidden by default) -->
+          <div class="card hidden" id="edit-panel" style="padding:32px;margin-bottom:32px">
+            <h2 style="font-size:22px;font-weight:700;margin-bottom:24px">Edit Profile</h2>
+            <div class="form">
+              <div class="form-group">
+                <label class="form-label" for="p-name">Display Name</label>
+                <input id="p-name" type="text" class="form-input no-icon" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="p-email">Email</label>
+                <input id="p-email" type="email" class="form-input no-icon" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="p-bio">Bio</label>
+                <textarea id="p-bio" class="form-textarea" placeholder="Tell us about yourself and your plant journey..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-dark btn-sm" style="flex:1" onclick="toggleEdit()">Cancel</button>
+                <button class="btn btn-green btn-sm" style="flex:1" onclick="saveEdit()">Save Changes</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saved plants -->
+          <div id="view-panel">
+            <div class="section-row">
+              <h2 style="font-size:22px;font-weight:700">Saved Plants
+                <span id="saved-count" class="match-badge" style="margin-left:8px;font-size:13px">0</span>
+              </h2>
+              <a href="recommendations.html" class="btn btn-dark btn-sm">Browse More</a>
+            </div>
+
+            <div class="saved-grid"></div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/saved.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

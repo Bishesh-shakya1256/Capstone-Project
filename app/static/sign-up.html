@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- Logo mark -->
+    <div class="auth-logo">
+      <img src="images/logo-icon.png" alt="" />
+    </div>
+
+    <!-- Heading -->
+    <div class="auth-heading">
+      <h1>Join GreenScape</h1>
+      <p>Create your account to start your plant journey</p>
+    </div>
+
+    <!-- Card -->
+    <div class="card auth-card">
+      <form class="form" id="signup-form" onsubmit="return false">
+
+        <!-- Error message -->
+        <div id="signup-error" style="
+          display:none;
+          background:rgba(248,113,113,.12);
+          border:1px solid rgba(248,113,113,.35);
+          color:#f87171;
+          padding:10px 14px;
+          border-radius:10px;
+          font-size:13px;
+          margin-bottom:12px;
+        "></div>
+
+        <!-- Full name -->
+        <div class="form-group">
+          <label class="form-label" for="su-name">Full Name</label>
+          <div class="input-wrap">
+            <img src="images/name.png" alt="" class="input-icon" />
+            <input id="su-name" type="text" class="form-input" placeholder="Your full name" autocomplete="name" />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="su-email">Email Address</label>
+          <div class="input-wrap">
+            <img src="images/email.png" alt="" class="input-icon" />
+            <input id="su-email" type="email" class="form-input" placeholder="you@example.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="su-password">Password</label>
+          <div class="input-wrap">
+            <img src="images/password.png" alt="" class="input-icon" />
+            <input id="su-password" type="password" class="form-input" placeholder="At least 6 characters" autocomplete="new-password" style="padding-right:40px" />
+            <button type="button" class="input-icon-r toggle-pw" aria-label="Toggle password">👁</button>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label class="form-label" for="su-confirm">Confirm Password</label>
+          <div class="input-wrap">
+            <img src="images/password.png" alt="" class="input-icon" />
+            <input id="su-confirm" type="password" class="form-input" placeholder="Re-enter your password" autocomplete="new-password" style="padding-right:40px" />
+            <button type="button" class="input-icon-r toggle-pw" aria-label="Toggle password">👁</button>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="form-footer">
+          <label class="checkbox-label">
+            <input type="checkbox" id="su-terms" />
+            I agree to <a href="terms-privacy.html">Terms of Service</a> and <a href="terms-privacy.html">Privacy Policy</a>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-green btn-sm btn-full">Create Account</button>
+
+      </form>
+
+      <p class="divider-text">
+        Already have an account? <a href="signin.html">Sign in</a>
+      </p>
+    </div>
+
+    <a href="index.html" class="nav-link">← Back to Home</a>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>

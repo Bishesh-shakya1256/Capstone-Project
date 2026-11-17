@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommendations – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="Logo" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+    <div class="nav-links">
+      <a href="recommendations.html" class="nav-link active">Recommendations</a>
+      <a href="dashboard.html" class="nav-link nav-auth" style="display:none">Dashboard</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="feedback.html" class="nav-link">Feedback</a>
+      <a href="signin.html" class="btn btn-green btn-sm nav-guest">Sign In</a>
+      <a href="profile.html" class="user-info nav-auth" style="display:none" title="My profile">
+        <span class="avatar gs-initial">?</span>
+        <span class="info gs-greeting">Hi!</span>
+      </a>
+      <button id="logout-btn" class="btn btn-sm logout--btn nav-auth" style="display:none">Log out</button>
+    </div>
+  </nav>
+
+  <div class="recs-page">
+    <div class="container">
+
+      <div class="recs-header">
+        <h1>Your Curated Greenscape</h1>
+        <a href="query.html" class="btn btn-dark btn-sm">Refine Search</a>
+      </div>
+      <p id="recs-subtitle" class="recs-subtitle">Loading your plant recommendations…</p>
+
+      <div class="recs-toolbar">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="plant-search" class="search-input" type="text" placeholder="Search plants by name…" autocomplete="off" />
+          <button id="search-clear" class="search-clear" title="Clear" style="display:none">✕</button>
+        </div>
+        <div id="active-filters" class="active-filters"></div>
+      </div>
+
+      <div id="recs-grid" class="recs-grid"></div>
+      <div id="recs-pagination" class="pagination"></div>
+
+    </div>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/saved.js"></script>
+  <script src="js/recommendations.js"></script>
+</body>
+</html>

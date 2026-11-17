@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-link">← Back to Home</a>
+
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+  </nav>
+
+  <div class="feedback-page">
+    <div class="card feedback-card">
+
+      <div class="feedback-header">
+        <h1>Share Your Feedback</h1>
+        <p>Help us improve GreenScape for plant lovers everywhere</p>
+      </div>
+
+      <!-- Success message (hidden by default) -->
+      <div class="success-box hidden" id="success-msg">
+        🌿 Thank you for your feedback! We'll use it to improve your experience.
+      </div>
+
+      <!-- Form -->
+      <form class="form" id="feedback-form" onsubmit="submitFeedback(event)">
+
+        <!-- Star rating -->
+        <div class="form-group">
+          <label class="form-label-lg">How would you rate your experience?</label>
+          <div class="rating-row" id="stars">
+            <button type="button" class="star" data-star="1">★</button>
+            <button type="button" class="star" data-star="2">★</button>
+            <button type="button" class="star" data-star="3">★</button>
+            <button type="button" class="star" data-star="4">★</button>
+            <button type="button" class="star" data-star="5">★</button>
+          </div>
+          <p class="rating-label" id="rating-label"></p>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label class="form-label" for="category">Feedback Category</label>
+          <select id="category" class="form-select">
+            <option value="">Select a category</option>
+            <option value="recommendations">Plant Recommendations</option>
+            <option value="ui">User Interface</option>
+            <option value="accuracy">Recommendation Accuracy</option>
+            <option value="feature">Feature Request</option>
+            <option value="bug">Bug Report</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label class="form-label" for="message">Your Feedback</label>
+          <textarea id="message" class="form-textarea" rows="5"
+            placeholder="Tell us what you think — what worked well, what could be better..."></textarea>
+        </div>
+
+        <!-- Name (optional) -->
+        <div class="form-group">
+          <label class="form-label" for="fname">Name <span class="text-muted"></span></label>
+          <input id="fname" type="text" class="form-input no-icon" placeholder="...." />
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <a href="index.html" class="btn btn-dark btn-sm" style="flex:1;justify-content:center">Cancel</a>
+          <button type="submit" class="btn btn-green btn-sm" style="flex:1">Submit Feedback</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/feedback.js"></script>
+</body>
+</html>

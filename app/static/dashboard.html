@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <script>
+    if (!sessionStorage.getItem('gsUser')) location.replace('signin.html');
+  </script>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="Logo" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+    <div class="nav-links">
+      <a href="recommendations.html" class="nav-link">Recommendations</a>
+      <a href="dashboard.html" class="nav-link active">Dashboard</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="feedback.html" class="nav-link">Feedback</a>
+      <a href="profile.html" class="user-info" title="My profile">
+        <span class="avatar gs-initial"></span>
+        <span class="info gs-greeting"></span>
+      </a>
+      <button id="logout-btn" class="btn btn-sm logout--btn">Log out</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-page">
+    <div class="container">
+
+      <!-- Welcome banner -->
+      <div class="welcome-banner">
+        <div>
+          <h1 id="gs-dash-welcome">Welcome back! 🌿</h1>
+          <p>Ready to find your next perfect plant? Your space is looking greener every day.</p>
+        </div>
+        <a href="query.html" class="btn btn-green btn-md">Get New Recommendations</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="card stat-card">
+          <div class="stat-number" id="dash-plants-saved">0</div>
+          <div class="stat-label">Plants Saved</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-number" id="dash-searches-run">0</div>
+          <div class="stat-label">Searches Run</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-number" id="dash-plants-collection">0</div>
+          <div class="stat-label">Plants in Collection</div>
+        </div>
+      </div>
+
+      <!-- Recent recommendations -->
+      <div class="section-row">
+        <h2>Saved Plants</h2>
+        <a href="recommendations.html" class="btn btn-dark btn-sm">Browse All</a>
+      </div>
+      <div id="dash-recs-grid" class="recs-grid" style="margin-bottom:48px"></div>
+
+      <!-- Highlights -->
+      <div class="features-grid">
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/light.png" alt="" />
+          </div>
+          <h3>Light Conditions</h3>
+          <p>Update your light preferences to refine your recommendations.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/care-image.png" alt="" />
+          </div>
+          <h3>Care Level</h3>
+          <p>Adjust how much time you can dedicate to plant care this season.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/air quality.png" alt="" />
+          </div>
+          <h3>Air Quality</h3>
+          <p>Prioritize air-purifying plants for a healthier indoor space.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/saved.js"></script>
+  <script>
+    // Plants-saved stat
+    const savedCountEl = document.getElementById('dash-plants-saved');
+    const saved = getSavedPlants();
+    if (savedCountEl) savedCountEl.textContent = saved.length;
+
+    fetch('/api/dashboard-stats').then(r=>r.json()).then(d=>{
+      document.getElementById('dash-searches-run').textContent = d.searches_run;
+      document.getElementById('dash-plants-collection').textContent = d.total_plants;
+    }).catch(()=>{});
+
+    // ── Plant detail modal ────────────────────────────────────────────────────
+    function showDashModal(plant) {
+      let overlay = document.getElementById('dash-modal');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'dash-modal';
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = `
+          <div class="modal-box">
+            <button class="modal-close-btn" id="dash-modal-close">✕</button>
+            <div id="dash-modal-content"></div>
+          </div>`;
+        document.body.appendChild(overlay);
+        document.getElementById('dash-modal-close').addEventListener('click', closeDashModal);
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeDashModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDashModal(); });
+      }
+
+      const toxColor = plant.toxicity_level === 'Non-toxic' ? 'var(--green)' : '#f87171';
+      const toxBg    = plant.toxicity_level === 'Non-toxic' ? 'rgba(16,185,129,.15)' : 'rgba(248,113,113,.15)';
+      const fields   = [
+        ['Growth Rate', plant.growth_rate],
+        ['Light',       plant.light_requirement],
+        ['Watering',    plant.watering_frequency],
+        ['Maintenance', plant.maintenance_level],
+        ['Size',        plant.size_category],
+        ['Humidity',    plant.humidity_requirement],
+        ['Temperature', plant.temperature_range],
+        ['Category',    plant.category_name],
+      ];
+
+      function esc(s) {
+        return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      document.getElementById('dash-modal-content').innerHTML = `
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-plant-name">${esc(plant.plant_name)}</h2>
+            <p class="modal-plant-sub">${esc(plant.category_name || 'General')}</p>
+          </div>
+          <span style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;
+                       background:${toxBg};color:${toxColor};white-space:nowrap;flex-shrink:0">
+            ${esc(plant.toxicity_level || 'Unknown')}
+          </span>
+        </div>
+        ${plant.image_url ? `<img class="modal-plant-img" src="${esc(plant.image_url)}" alt="${esc(plant.plant_name)}" onerror="this.style.display='none'">` : ''}
+        <div class="modal-grid">
+          ${fields.map(([l, v]) => `
+            <div class="modal-detail">
+              <div class="modal-detail-label">${esc(l)}</div>
+              <div class="modal-detail-value">${esc(v || '—')}</div>
+            </div>`).join('')}
+        </div>`;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDashModal() {
+      const overlay = document.getElementById('dash-modal');
+      if (overlay) overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Render saved plants grid ──────────────────────────────────────────────
+    const GRADS  = ['grad-1','grad-2','grad-3','grad-4','grad-5','grad-6'];
+    const EMOJIS = ['🌿','🌱','🌾','🍃','🌺','🌸','🌻','🌼','🌵','🎋','🪴','🌳'];
+    const grid   = document.getElementById('dash-recs-grid');
+
+    if (saved.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0">
+          <p class="text-muted" style="margin-bottom:16px">No saved plants yet.</p>
+          <a href="recommendations.html" class="btn btn-green btn-sm">Browse Plants</a>
+        </div>`;
+    } else {
+      const recent = saved.slice(-3).reverse();
+      grid.innerHTML = recent.map((plant, i) => {
+        const hasImg = plant.image_url;
+        const imgClass = hasImg ? '' : GRADS[i % GRADS.length];
+        const imgStyle = hasImg ? 'padding:0;overflow:hidden' : '';
+        const imgContent = hasImg
+          ? `<img src="${plant.image_url}" alt="${plant.plant_name ?? ''}"
+                  style="width:100%;height:100%;object-fit:cover"
+                  onerror="this.parentElement.classList.add('${GRADS[i % GRADS.length]}');this.style.display='none';this.parentElement.innerHTML+='<span style=\\'font-size:72px;line-height:1\\'>${EMOJIS[i % EMOJIS.length]}</span>'">`
+          : `<span style="font-size:72px;line-height:1">${EMOJIS[i % EMOJIS.length]}</span>`;
+        return `
+        <div class="card plant-card">
+          <div class="plant-card-img ${imgClass}" style="height:160px;${imgStyle}">
+            ${imgContent}
+          </div>
+          <div class="plant-card-body">
+            <div class="plant-card-top">
+              <h3 style="font-size:16px">${String(plant.plant_name ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</h3>
+            </div>
+            <div class="plant-tags" style="margin-bottom:12px">
+              ${plant.maintenance_level ? `<span class="plant-tag">${String(plant.maintenance_level).replace(/</g,'&lt;')} Care</span>` : ''}
+              ${plant.toxicity_level === 'Non-toxic' ? '<span class="plant-tag">Pet-Safe</span>' : ''}
+            </div>
+            <button class="btn btn-green btn-sm btn-full dash-detail-btn" data-idx="${i}">View Details</button>
+          </div>
+        </div>`;
+      }).join('');
+
+      grid.querySelectorAll('.dash-detail-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          showDashModal(recent[parseInt(btn.dataset.idx)]);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

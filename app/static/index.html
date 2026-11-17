@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenScape – Find Your Perfect Indoor Plant</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="Logo" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+    <div class="nav-links">
+      <a href="recommendations.html" class="nav-link">Recommendations</a>
+      <a href="dashboard.html" class="nav-link nav-auth" style="display:none">Dashboard</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="feedback.html" class="nav-link">Feedback</a>
+      <a href="signin.html" class="btn btn-green btn-sm nav-guest">Sign In</a>
+      <a href="profile.html" class="user-info nav-auth" style="display:none" title="My profile">
+        <span class="avatar gs-initial">?</span>
+        <span class="info gs-greeting">Hi!</span>
+      </a>
+      <button id="logout-btn" class="btn btn-sm logout--btn nav-auth" style="display:none">Log out</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="container">
+    <div class="hero">
+      <div class="hero-text">
+        <div>
+      <span class="badge">Personalized Plant Selection</span>
+      </div>
+        <h1>Find the Perfect Indoor Plant for Your Space</h1>
+        <p>Get personalized plant recommendations based on your home environment, lifestyle, and care preferences.</p>
+        <a href="query.html" class="btn btn-green btn-lg" style="align-self:flex-start">
+          Get Started
+          <img src="images/get started.png" alt="" />
+        </a>
+      </div>
+      <div class="hero-image">
+        <img src="images/Landing image.png" alt="Indoor plants" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="about">
+    <div class="container">
+      <div class="features-header">
+        <h2>Curated with Intention</h2>
+        <p>Our recommendation system considers all the factors that matter</p>
+      </div>
+      <div class="features-grid">
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/light.png" alt="" />
+          </div>
+          <h3>Light Conditions</h3>
+          <p>Whether your space is bathed in sunlight or tucked in the shade, we'll find plants that thrive in your lighting conditions.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/care-image.png" alt="" />
+          </div>
+          <h3>Care Level</h3>
+          <p>From busy professionals to dedicated plant parents, we match plants to your available time and experience level.</p>
+        </div>
+        <div class="card feature-card">
+          <div class="icon-box">
+            <img src="images/air quality.png" alt="" />
+          </div>
+          <h3>Air Quality</h3>
+          <p>Many plants naturally purify air. We'll recommend varieties that improve your indoor environment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/toast.js"></script>
+  <script src="js/session.js"></script>
+</body>
+</html>

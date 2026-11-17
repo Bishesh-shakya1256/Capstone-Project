@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Your Plant – GreenScape</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-back">
+      <img src="images/back to home.png" alt="" />
+      Back to Home
+    </a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <img src="images/logo-icon.png" alt="" />
+      </div>
+      <span class="logo-name">GreenScape</span>
+    </a>
+    <div style="width:80px"></div>
+  </nav>
+
+  <div class="query-page">
+    <div class="container-narrow">
+
+      <!-- Header -->
+      <div class="query-header">
+        <h1>Find Your Perfect Match</h1>
+        <p>Answer a few questions to get personalized plant recommendations</p>
+      </div>
+
+      <!-- Form -->
+      <div class="card query-form" id="query-form">
+
+        <!-- Light -->
+        <div class="form-group">
+          <label class="form-label-lg">What's your light situation?</label>
+          <select id="light-select" class="form-select">
+            <option value="">Select light level</option>
+            <option value="low">Low – minimal natural light</option>
+            <option value="indirect">Medium – bright indirect light</option>
+            <option value="direct">High – direct sunlight</option>
+          </select>
+        </div>
+
+        <!-- Care -->
+        <div class="form-group">
+          <label class="form-label-lg">How much care can you provide?</label>
+          <div class="radio-options" data-group="care">
+            <div class="radio-option" data-value="low">
+              <input type="radio" name="care" id="care-low" value="low" />
+              <label for="care-low">Low – I want a plant that practically takes care of itself</label>
+            </div>
+            <div class="radio-option" data-value="medium">
+              <input type="radio" name="care" id="care-med" value="medium" />
+              <label for="care-med">Medium – I can water weekly and provide basic care</label>
+            </div>
+            <div class="radio-option" data-value="high">
+              <input type="radio" name="care" id="care-high" value="high" />
+              <label for="care-high">High – I enjoy tending to plants regularly</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="form-group">
+          <label class="form-label-lg">What size plant are you looking for?</label>
+          <select id="size-select" class="form-select">
+            <option value="">Select plant size</option>
+            <option value="small">Small – tabletop or shelf</option>
+            <option value="medium">Medium – floor plant up to 3 ft</option>
+            <option value="large">Large – statement plant over 3 ft</option>
+          </select>
+        </div>
+
+        <!-- Pets -->
+        <div class="form-group">
+          <label class="form-label-lg">Do you have pets?</label>
+          <div class="radio-options" data-group="pets">
+            <div class="radio-option" data-value="yes">
+              <input type="radio" name="pets" id="pets-yes" value="yes" />
+              <label for="pets-yes">Yes, only show pet-safe plants</label>
+            </div>
+            <div class="radio-option" data-value="no">
+              <input type="radio" name="pets" id="pets-no" value="no" />
+              <label for="pets-no">No pets</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-group">
+          <label class="form-label-lg">Plant parent experience?</label>
+          <select id="experience-select" class="form-select">
+            <option value="">Select experience level</option>
+            <option value="beginner">Beginner – first plant ever</option>
+            <option value="some">Some experience – had plants before</option>
+            <option value="expert">Expert – seasoned plant parent</option>
+          </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <a href="index.html" class="btn btn-dark btn-sm" style="flex:1;justify-content:center">Cancel</a>
+          <button id="get-recs-btn" class="btn btn-green btn-sm" style="flex:1;justify-content:center">
+            Get Recommendations
+            <img src="images/get started.png" alt="" />
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/toast.js"></script>
+  <script src="js/query.js"></script>
+</body>
+</html>
